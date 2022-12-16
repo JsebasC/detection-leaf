@@ -4,15 +4,11 @@ const router = express.Router();
 const {isLoggedIn} = require('../lib/auth')
 const multer = require('multer')
 
-
-// middlewares
-
-
-
 router.get('/add',isLoggedIn, (req,res)=>{
     res.render('leaf/add');
 })
 
+//agregar hojas
 router.post('/add',isLoggedIn, async (req,res)=>{
     const pathimage = req.file.filename;
     const {nombre, nombreCientifico, descripcion} = req.body;

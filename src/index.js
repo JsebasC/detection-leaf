@@ -1,13 +1,16 @@
 const express = require('express');
-const morgan = require('morgan');
-const exphbs = require('express-handlebars');
-const path = require('path');
+const morgan = require('morgan'); //Morgan es un middleware de logging para aplicaciones de Node.js
+ //basadas en el framework de servidor web Express. 
+//Se utiliza para registrar las solicitudes HTTP entrantes y las respuestas HTTP salientes en una aplicación
+const exphbs = require('express-handlebars'); // motor de plantilla
+const path = require('path'); //path es un módulo de Node.js que proporciona
+// funciones para trabajar con rutas de archivos y directorios de manera más sencilla.
 const flash = require('connect-flash');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const passport = require('passport');
 const {database} = require('./keys');
-const multer = require('multer');
+const multer = require('multer'); // que se utiliza para procesar y almacenar archivos enviados a través de formularios HTML
 const storage = multer.diskStorage({
     destination: path.join(__dirname, 'public/uploads'),
     filename: (req, file, cb) =>{
@@ -28,10 +31,10 @@ app.engine('.hbs',exphbs.engine({
     defaultLayout: 'main',
     layoutDir: path.join(app.get('views'), 'layouts'),
     partialsDir: path.join(app.get('views'),'partials'),
-    extname: '.hbs',
+    extname: '.hbs', 
     helpers: require('./lib/handlebars')
 }))
-app.set('view engine', '.hbs')
+app.set('view engine', '.hbs') //motor de plantillas
 
 //Middlewares
 app.use(session({
@@ -40,7 +43,12 @@ app.use(session({
     saveUninitialized: false,
     store: new MySQLStore(database)
 }))
-app.use(flash());
+app.use(flash()); //almacenimiento temporal : Flash se utiliza a menudo para mostrar mensajes de éxito o error
+// app.get('/form-success', (req, res) => {
+//     // Mostrar el mensaje de éxito a los usuarios
+//     res.render('form-success', { flash: res.locals.flash });
+//   });
+
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
@@ -73,3 +81,17 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.listen(app.get('port'),()=>{
     console.log('server on port',app.get);
 });
+
+
+
+// // Unir dos rutas de archivo
+// const filePath = path.join('/path/to/dir', 'file.txt');
+
+// // Obtener la extensión de un archivo
+// const fileExt = path.extname('/path/to/dir/file.txt');
+
+// // Obtener el nombre de archivo sin la extensión
+// const fileName = path.basename('/path/to/dir/file.txt', '.txt');
+
+// // Normalizar una ruta de archivo
+// const normalizedPath = path.normalize('/path//to/dir/../file.txt');

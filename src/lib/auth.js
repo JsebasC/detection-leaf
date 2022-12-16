@@ -1,6 +1,6 @@
 module.exports = {
-    isLoggedIn(req, res,  next){
-        if(req.isAuthenticated() ){
+    isLoggedIn(req, res,  next){ //metodo para validar si esta autenticado
+        if(req.isAuthenticated() ){ //redirigimos 
             console.log(req.user);
             return next();
         }

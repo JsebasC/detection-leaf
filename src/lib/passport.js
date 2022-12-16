@@ -3,6 +3,9 @@ const LocalStrategy = require("passport-local").Strategy;
 const pool = require("../database");
 const helpers = require("../lib/helpers");
 
+
+//se utiliza para autenticar a los usuarios en una aplicación basada en Node.js usando sus credenciales de inicio de sesión y contraseña.
+// Esta estrategia forma parte del paquete de autenticación passport.js,
 passport.use('local.signin', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
@@ -19,10 +22,17 @@ passport.use('local.signin', new LocalStrategy({
         }
     } else {
         return done(null, false, req.flash('message','The User does not exists'));
-    }
+  }
+  
+  // Verificar las credenciales del usuario aquí
+    // Si las credenciales son válidas, llama a done() con el usuario
+    // Si las credenciales son inválidas, llama a done(null, false)
+    // Si hay un error, llama a done(err)
 }
 ));
 
+
+//utilizando la estrategia para registrarse
 passport.use(
   "local.signup",
   new LocalStrategy(

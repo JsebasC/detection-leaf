@@ -1,6 +1,6 @@
 const {format} = require('timeago.js')
 
-
+//se utiliza para formatear fecha y hora. por ejemplo: 'hace 3 horas'.
 const helpers = {};
 
 helpers.timeago = (timestamp)=>{

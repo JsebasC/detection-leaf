@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 const helpers = {} ;
-
+// hashear contraseñas y comparar contraseñas hasheadas
 
 helpers.encryptPassword = async (password) =>{
     const salt = await bcrypt.genSalt(10);
